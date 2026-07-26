@@ -9,6 +9,7 @@ export interface ReadingQuote {
   bgImage?: string;
   accentColor: string;
   tag: string;
+  isCustom?: boolean;
 }
 
 export const READING_QUOTES: ReadingQuote[] = [
@@ -107,5 +108,83 @@ export const READING_QUOTES: ReadingQuote[] = [
     bgImage: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=1200&auto=format&fit=crop',
     accentColor: 'text-violet-300',
     tag: '🚀 수천 가지의 모험',
+  },
+  {
+    id: 'quote-9',
+    quote: '책을 읽는 사람은 죽기 전에 천 번의 인생을 살고, 읽지 않는 사람은 단 한 번의 인생을 산다.',
+    author: '조지 R. R. 마틴',
+    source: '용과의 춤',
+    category: 'imagination',
+    categoryLabel: '꿈과 상상력',
+    bgGradient: 'from-blue-950 via-indigo-900 to-slate-900',
+    bgImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1200&auto=format&fit=crop',
+    accentColor: 'text-blue-300',
+    tag: '📚 무한한 삶의 경험',
+  },
+  {
+    id: 'quote-10',
+    quote: '독서는 마음을 넓히고, 생각을 깊게 하며, 영혼을 풍요롭게 하는 최고의 양식이다.',
+    author: '헬렌 켈러',
+    source: '내 삶의 이야기',
+    category: 'growth',
+    categoryLabel: '인생과 성장',
+    bgGradient: 'from-amber-950 via-emerald-950 to-slate-900',
+    bgImage: 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?q=80&w=1200&auto=format&fit=crop',
+    accentColor: 'text-amber-300',
+    tag: '🌱 영혼의 양식',
+  },
+  {
+    id: 'quote-11',
+    quote: '가장 위대한 책은 우리 스스로가 한 줄 한 줄 써내려가는 자신의 인생이다.',
+    author: '랄프 월도 에머슨',
+    source: '자기신뢰',
+    category: 'courage',
+    categoryLabel: '용기와 도전',
+    bgGradient: 'from-slate-900 via-rose-950 to-purple-950',
+    bgImage: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1200&auto=format&fit=crop',
+    accentColor: 'text-rose-300',
+    tag: '✏️ 나만의 인생 책',
+  },
+  {
+    id: 'quote-12',
+    quote: '독서에 소비한 시간은 결코 허비된 시간이 아니다.',
+    author: '마르셀 프루스트',
+    source: '독서에 관하여',
+    category: 'peace',
+    categoryLabel: '마음의 평화',
+    bgGradient: 'from-teal-950 via-cyan-900 to-slate-900',
+    bgImage: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop',
+    accentColor: 'text-teal-300',
+    tag: '🕰️ 소중한 가치의 시간',
   }
 ];
+
+/**
+ * Get Today's Quote Index based on calendar date (YYYY-MM-DD)
+ * Ensures every day automatically features a unique, fresh quote of the day!
+ */
+export function getDailyQuoteIndex(totalCount: number, offsetDays: number = 0): number {
+  if (totalCount <= 0) return 0;
+  const now = new Date();
+  now.setDate(now.getDate() + offsetDays);
+  
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  
+  // Deterministic daily hashing formula
+  const dateSeed = year * 10000 + month * 100 + date;
+  const hash = Math.abs((dateSeed * 2654435761) ^ (dateSeed >> 16));
+  return hash % totalCount;
+}
+
+/**
+ * Format Today's Korean Date String
+ */
+export function getTodayFormattedString(): string {
+  const now = new Date();
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+  const dayName = days[now.getDay()];
+  return `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 (${dayName})`;
+}
+
