@@ -17,8 +17,17 @@ export interface ReadingLog {
 }
 
 export type UserMode = 'student' | 'teacher';
-export type StudentTab = 'submit' | 'history';
-export type TeacherTab = 'dashboard' | 'hallOfFame' | 'settings';
+export type StudentTab = 'submit' | 'history' | 'bestsellers';
+export type TeacherTab = 'dashboard' | 'hallOfFame' | 'bestsellers' | 'settings';
+
+export interface Yes24Book {
+  rank: number;
+  title: string;
+  author: string;
+  publisher: string;
+  description: string;
+  category: string;
+}
 
 export interface GASConfig {
   webAppUrl: string;

@@ -13,12 +13,13 @@ import { StudentForm } from './components/StudentForm';
 import { StudentHistory } from './components/StudentHistory';
 import { TeacherDashboard } from './components/TeacherDashboard';
 import { HallOfFame } from './components/HallOfFame';
+import { Yes24Bestsellers } from './components/Yes24Bestsellers';
 import { GASSettingsModal } from './components/GASSettingsModal';
 import { TeacherAuthModal } from './components/TeacherAuthModal';
 import { LogDetailModal } from './components/LogDetailModal';
 
 import { 
-  PenTool, History, BarChart3, Trophy, Settings, GraduationCap, School, BookOpen, Sparkles, Database
+  PenTool, History, BarChart3, Trophy, Settings, GraduationCap, School, BookOpen, Sparkles, Database, TrendingUp, Flame
 } from 'lucide-react';
 
 export default function App() {
@@ -33,6 +34,9 @@ export default function App() {
   const [isGASSettingsOpen, setIsGASSettingsOpen] = useState<boolean>(false);
   const [selectedLog, setSelectedLog] = useState<ReadingLog | null>(null);
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
+
+  // Selected book info for student form pre-filling from Yes24 Bestsellers
+  const [selectedBookForForm, setSelectedBookForForm] = useState<{ title: string; author: string; publisher: string; category?: string } | null>(null);
 
   // Initial Load from localStorage & Auto-Sync
   useEffect(() => {
@@ -143,10 +147,10 @@ export default function App() {
         <ReadingQuotesHero />
 
         {/* Navigation Sub-Tabs Bar */}
-        <div className="bg-white rounded-2xl p-2 shadow-xs border border-amber-200/80 flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-2 shadow-xs border border-amber-200/80 flex items-center justify-between flex-wrap gap-2">
           
           {userMode === 'student' ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <button
                 id="student-tab-submit-btn"
                 onClick={() => setStudentTab('submit')}
@@ -172,9 +176,22 @@ export default function App() {
                 <History className="w-4 h-4" />
                 <span>내 온라인 서재 기록</span>
               </button>
+
+              <button
+                id="student-tab-bestsellers-btn"
+                onClick={() => setStudentTab('bestsellers')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                  studentTab === 'bestsellers'
+                    ? 'bg-amber-700 text-amber-50 shadow-sm shadow-amber-700/20'
+                    : 'text-amber-800 hover:text-amber-950 hover:bg-amber-50'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4 text-amber-400" />
+                <span>YES24 실시간 베스트셀러</span>
+              </button>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <button
                 id="teacher-tab-dashboard-btn"
                 onClick={() => setTeacherTab('dashboard')}
@@ -202,6 +219,19 @@ export default function App() {
               </button>
 
               <button
+                id="teacher-tab-bestsellers-btn"
+                onClick={() => setTeacherTab('bestsellers')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                  teacherTab === 'bestsellers'
+                    ? 'bg-amber-700 text-amber-50 shadow-sm shadow-amber-700/20'
+                    : 'text-amber-800 hover:text-amber-950 hover:bg-amber-50'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4 text-amber-400" />
+                <span>YES24 실시간 베스트셀러</span>
+              </button>
+
+              <button
                 id="teacher-tab-settings-btn"
                 onClick={() => setIsGASSettingsOpen(true)}
                 className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-amber-800 hover:text-amber-950 hover:bg-amber-50 transition-all"
@@ -223,12 +253,23 @@ export default function App() {
         {/* View Content Rendering */}
         {userMode === 'student' ? (
           studentTab === 'submit' ? (
-            <StudentForm onSubmitLog={handleCreateLog} />
-          ) : (
+            <StudentForm 
+              onSubmitLog={handleCreateLog} 
+              initialBookInfo={selectedBookForForm}
+            />
+          ) : studentTab === 'history' ? (
             <StudentHistory
               logs={logs}
               onSelectLog={(log) => setSelectedLog(log)}
               onDeleteLog={handleDeleteLog}
+            />
+          ) : (
+            <Yes24Bestsellers
+              onSelectBookForLog={(book) => {
+                setSelectedBookForForm(book);
+                setStudentTab('submit');
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              }}
             />
           )
         ) : (
@@ -242,10 +283,19 @@ export default function App() {
               onSyncWithGAS={() => handleSyncWithGAS()}
               isSyncing={isSyncing}
             />
-          ) : (
+          ) : teacherTab === 'hallOfFame' ? (
             <HallOfFame
               logs={logs}
               onSelectLog={(log) => setSelectedLog(log)}
+            />
+          ) : (
+            <Yes24Bestsellers
+              onSelectBookForLog={(book) => {
+                setSelectedBookForForm(book);
+                setUserMode('student');
+                setStudentTab('submit');
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              }}
             />
           )
         )}

@@ -8,6 +8,7 @@ interface StudentFormProps {
   defaultGrade?: number;
   defaultClass?: number;
   defaultName?: string;
+  initialBookInfo?: { title: string; author: string; publisher: string; category?: string } | null;
 }
 
 const GENRES = ['문학', '비문학', '과학', '역사', '사회/경제', '예술/문화', '자기계발', '기타'];
@@ -17,19 +18,42 @@ export const StudentForm: React.FC<StudentFormProps> = ({
   defaultGrade = 5,
   defaultClass = 2,
   defaultName = '',
+  initialBookInfo,
 }) => {
   const [grade, setGrade] = useState<number>(defaultGrade);
   const [classNum, setClassNum] = useState<number>(defaultClass);
   const [studentName, setStudentName] = useState<string>(defaultName);
   
-  const [bookTitle, setBookTitle] = useState<string>('');
-  const [author, setAuthor] = useState<string>('');
-  const [publisher, setPublisher] = useState<string>('');
+  const [bookTitle, setBookTitle] = useState<string>(initialBookInfo?.title || '');
+  const [author, setAuthor] = useState<string>(initialBookInfo?.author || '');
+  const [publisher, setPublisher] = useState<string>(initialBookInfo?.publisher || '');
   const [genre, setGenre] = useState<string>('문학');
   const [readDate, setReadDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [rating, setRating] = useState<number>(5);
   const [summary, setSummary] = useState<string>('');
   const [thoughts, setThoughts] = useState<string>('');
+
+  // Update form fields if initialBookInfo changes
+  React.useEffect(() => {
+    if (initialBookInfo) {
+      if (initialBookInfo.title) setBookTitle(initialBookInfo.title);
+      if (initialBookInfo.author) setAuthor(initialBookInfo.author);
+      if (initialBookInfo.publisher) setPublisher(initialBookInfo.publisher);
+      if (initialBookInfo.category) {
+        if (GENRES.includes(initialBookInfo.category)) {
+          setGenre(initialBookInfo.category);
+        } else if (initialBookInfo.category.includes('소설') || initialBookInfo.category.includes('시') || initialBookInfo.category.includes('문학')) {
+          setGenre('문학');
+        } else if (initialBookInfo.category.includes('과학') || initialBookInfo.category.includes('IT')) {
+          setGenre('과학');
+        } else if (initialBookInfo.category.includes('역사') || initialBookInfo.category.includes('인문')) {
+          setGenre('역사');
+        } else if (initialBookInfo.category.includes('자기계발')) {
+          setGenre('자기계발');
+        }
+      }
+    }
+  }, [initialBookInfo]);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmittedSuccess, setIsSubmittedSuccess] = useState<boolean>(false);
