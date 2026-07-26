@@ -6,12 +6,16 @@ interface TeacherAuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  title?: string;
+  description?: string;
 }
 
 export const TeacherAuthModal: React.FC<TeacherAuthModalProps> = ({
   isOpen,
   onClose,
   onSuccess,
+  title,
+  description,
 }) => {
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -85,9 +89,11 @@ export const TeacherAuthModal: React.FC<TeacherAuthModalProps> = ({
           <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-3 border border-indigo-100 shadow-sm">
             <ShieldCheck className="w-7 h-7" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900">교사 전용 대시보드 진입</h2>
-          <p className="text-sm text-slate-500 mt-1">
-            학급 독서 통계 및 학생 기록 관리를 위한 교사 인증이 필요합니다.
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+            {title || "교사 전용 대시보드 진입"}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            {description || "학급 독서 통계 및 학생 기록 관리를 위한 교사 인증이 필요합니다."}
           </p>
         </div>
 

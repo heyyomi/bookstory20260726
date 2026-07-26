@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, GraduationCap, School, Database, RefreshCw, CheckCircle2, AlertCircle, Library, Bookmark } from 'lucide-react';
+import { BookOpen, GraduationCap, School, Database, RefreshCw, CheckCircle2, AlertCircle, Library, Bookmark, Lock } from 'lucide-react';
 import { UserMode, GASConfig } from '../types';
 
 interface HeaderProps {
@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({
                 ? 'bg-emerald-100/80 text-emerald-900 border border-emerald-300 hover:bg-emerald-200'
                 : 'bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200'
             }`}
-            title="구글 시트 연동 설정 열기"
+            title={userMode === 'teacher' ? "구글 시트 연동 설정 열기" : "🔒 구글 시트 연동 설정 (선생님 인증 필요)"}
           >
             <Database className="w-3.5 h-3.5" />
             <span className="flex items-center gap-1.5">
@@ -76,11 +76,13 @@ export const Header: React.FC<HeaderProps> = ({
                 <>
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                   <span>구글 시트 연동 완료</span>
+                  {userMode === 'student' && <Lock className="w-3 h-3 text-emerald-800" title="선생님 전용 설정" />}
                 </>
               ) : (
                 <>
                   <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
                   <span>구글 시트 미연동 (설정)</span>
+                  {userMode === 'student' && <Lock className="w-3 h-3 text-amber-800" title="선생님 전용 설정" />}
                 </>
               )}
             </span>

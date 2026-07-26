@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { 
   BarChart2, BookOpen, Users, Trophy, Download, Search, Star, 
   MessageSquare, Trash2, Eye, Filter, RefreshCw, CheckCircle2, 
-  Sparkles, Calendar, Tag, ChevronDown
+  Sparkles, Calendar, Tag, ChevronDown, Settings, Database
 } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
@@ -19,6 +19,7 @@ interface TeacherDashboardProps {
   onSelectLog: (log: ReadingLog) => void;
   onSyncWithGAS: () => void;
   isSyncing: boolean;
+  onOpenGASSettings?: () => void;
 }
 
 const COLORS = ['#4F46E5', '#06B6D4', '#10B981', '#F59E0B', '#EC4899', '#8B5CF6', '#64748B'];
@@ -31,6 +32,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
   onSelectLog,
   onSyncWithGAS,
   isSyncing,
+  onOpenGASSettings,
 }) => {
   const [gradeFilter, setGradeFilter] = useState<number | 'all'>('all');
   const [classFilter, setClassFilter] = useState<number | 'all'>('all');
@@ -123,10 +125,22 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {onOpenGASSettings && (
+            <button
+              onClick={onOpenGASSettings}
+              id="teacher-dashboard-gas-settings-btn"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 text-xs font-bold rounded-xl transition-all shadow-2xs"
+            >
+              <Database className="w-4 h-4 text-amber-700" />
+              <span>구글 시트 연동 설정</span>
+            </button>
+          )}
+
           <button
             onClick={onSyncWithGAS}
             disabled={isSyncing}
+            id="teacher-dashboard-gas-sync-btn"
             className="flex items-center gap-1.5 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-all"
           >
             <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin text-indigo-600' : ''}`} />
@@ -135,6 +149,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
 
           <button
             onClick={() => exportLogsToCSV(filteredLogs)}
+            id="teacher-dashboard-export-csv-btn"
             className="flex items-center gap-1.5 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all shadow-sm shadow-indigo-100"
           >
             <Download className="w-4 h-4" />

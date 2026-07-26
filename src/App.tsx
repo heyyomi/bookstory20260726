@@ -32,9 +32,25 @@ export default function App() {
   const [gasConfig, setGasConfig] = useState<GASConfig>({ webAppUrl: '', lastSyncedAt: null, autoSync: true });
 
   const [isTeacherAuthOpen, setIsTeacherAuthOpen] = useState<boolean>(false);
+  const [pendingTeacherAction, setPendingTeacherAction] = useState<'switch_mode' | 'open_gas_settings' | null>(null);
   const [isGASSettingsOpen, setIsGASSettingsOpen] = useState<boolean>(false);
   const [selectedLog, setSelectedLog] = useState<ReadingLog | null>(null);
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
+
+  // Protected handler for opening Google Sheets settings
+  const handleOpenGASSettingsProtected = () => {
+    if (userMode === 'teacher') {
+      setIsGASSettingsOpen(true);
+    } else {
+      setPendingTeacherAction('open_gas_settings');
+      setIsTeacherAuthOpen(true);
+    }
+  };
+
+  const handleRequestTeacherAccess = (action: 'switch_mode' | 'open_gas_settings' = 'switch_mode') => {
+    setPendingTeacherAction(action);
+    setIsTeacherAuthOpen(true);
+  };
 
   // Selected book info for student form pre-filling from Yes24 Bestsellers
   const [selectedBookForForm, setSelectedBookForForm] = useState<{ title: string; author: string; publisher: string; category?: string } | null>(null);
@@ -135,10 +151,10 @@ export default function App() {
         userMode={userMode}
         setUserMode={setUserMode}
         gasConfig={gasConfig}
-        onOpenGASSettings={() => setIsGASSettingsOpen(true)}
+        onOpenGASSettings={handleOpenGASSettingsProtected}
         onSyncData={() => handleSyncWithGAS()}
         isSyncing={isSyncing}
-        onRequestTeacherAccess={() => setIsTeacherAuthOpen(true)}
+        onRequestTeacherAccess={() => handleRequestTeacherAccess('switch_mode')}
       />
 
       {/* Main Container */}
@@ -283,6 +299,7 @@ export default function App() {
               onSelectLog={(log) => setSelectedLog(log)}
               onSyncWithGAS={() => handleSyncWithGAS()}
               isSyncing={isSyncing}
+              onOpenGASSettings={handleOpenGASSettingsProtected}
             />
           ) : teacherTab === 'hallOfFame' ? (
             <HallOfFame
@@ -311,7 +328,7 @@ export default function App() {
         setStudentTab={setStudentTab}
         teacherTab={teacherTab}
         setTeacherTab={setTeacherTab}
-        onRequestTeacherAccess={() => setIsTeacherAuthOpen(true)}
+        onRequestTeacherAccess={() => handleRequestTeacherAccess('switch_mode')}
       />
 
       {/* Footer */}
@@ -327,10 +344,27 @@ export default function App() {
       {/* Modals */}
       <TeacherAuthModal
         isOpen={isTeacherAuthOpen}
-        onClose={() => setIsTeacherAuthOpen(false)}
+        title={
+          pendingTeacherAction === 'open_gas_settings'
+            ? "구글 시트 연동 설정 (선생님 인증)"
+            : "교사 전용 대시보드 진입"
+        }
+        description={
+          pendingTeacherAction === 'open_gas_settings'
+            ? "구글 시트 연동 및 시스템 설정을 변경하려면 교사 암호 인증이 필요합니다."
+            : "학급 독서 통계 및 학생 기록 관리를 위한 교사 인증이 필요합니다."
+        }
+        onClose={() => {
+          setIsTeacherAuthOpen(false);
+          setPendingTeacherAction(null);
+        }}
         onSuccess={() => {
           setIsTeacherAuthOpen(false);
           setUserMode('teacher');
+          if (pendingTeacherAction === 'open_gas_settings') {
+            setIsGASSettingsOpen(true);
+          }
+          setPendingTeacherAction(null);
         }}
       />
 
