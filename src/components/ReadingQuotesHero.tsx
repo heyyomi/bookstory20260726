@@ -18,6 +18,7 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
   const [likedIds, setLikedIds] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [isShuffling, setIsShuffling] = useState<boolean>(false);
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   // Filter quotes by category
   const filteredQuotes = React.useMemo(() => {
@@ -214,15 +215,17 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
       {/* Main Showcase Area */}
       {viewMode === 'carousel' ? (
         <div className="relative z-10 p-6 sm:p-10 min-h-[280px] sm:min-h-[320px] flex flex-col justify-between overflow-hidden">
-          {/* Background Photo Image Overlay with Parallax/Blur */}
-          {currentQuote.bgImage && (
-            <div className="absolute inset-0 z-0 opacity-25 mix-blend-overlay">
+          {/* Background Photo Image Overlay */}
+          {currentQuote.bgImage && !imageErrors[currentQuote.id] && (
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img
                 src={currentQuote.bgImage}
                 alt={currentQuote.author}
-                className="w-full h-full object-cover filter blur-[1px] scale-105 transition-all duration-700"
+                onError={() => setImageErrors(prev => ({ ...prev, [currentQuote.id]: true }))}
+                className="w-full h-full object-cover opacity-35 filter contrast-110 brightness-90 transition-all duration-700 scale-105"
                 referrerPolicy="no-referrer"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/80" />
             </div>
           )}
 

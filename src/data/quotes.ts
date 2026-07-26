@@ -20,7 +20,7 @@ export const READING_QUOTES: ReadingQuote[] = [
     category: 'growth',
     categoryLabel: '인생과 성장',
     bgGradient: 'from-amber-900/90 via-amber-800/80 to-slate-900',
-    bgImage: 'https://images.unsplash.com/photo-1507842225829-87cfa8e8ec43?q=80&w=1200&auto=format&fit=crop',
+    bgImage: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop',
     accentColor: 'text-amber-300',
     tag: '📖 독서의 힘',
   },
