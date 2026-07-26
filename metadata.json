@@ -1,0 +1,6 @@
+{
+  "name": "우리반 독서 라운지 & 기록장",
+  "description": "초·중·고등학교 학급을 위한 스마트 전자 독서기록장. 독서록 작성, 내 기록 조회, 교사 전용 대시보드 및 통계, 이달의 독서왕, 구글 시트 실시간 연동 기능 지원.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
