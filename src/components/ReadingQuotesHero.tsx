@@ -309,10 +309,10 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
                 src={currentQuote.bgImage}
                 alt={currentQuote.author}
                 onError={() => setImageErrors(prev => ({ ...prev, [currentQuote.id]: true }))}
-                className="w-full h-full object-cover opacity-30 filter contrast-110 brightness-90 transition-all duration-700 scale-105"
+                className="w-full h-full object-cover opacity-65 filter contrast-105 brightness-105 transition-all duration-700 scale-105"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-slate-950/50" />
             </div>
           )}
 
@@ -375,17 +375,17 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
           {/* Large Emotional Quote Display */}
           <div className="relative z-10 my-auto py-2">
             <div className="flex items-start gap-3">
-              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-400/40 shrink-0 rotate-180 -mt-1" />
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-300/60 shrink-0 rotate-180 -mt-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
               <div className="space-y-3">
-                <blockquote className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-relaxed drop-shadow-md">
+                <blockquote className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                   "{currentQuote.quote}"
                 </blockquote>
                 <div className="flex items-center gap-2 pt-1">
-                  <span className="w-6 h-0.5 bg-indigo-400/60 rounded-full" />
-                  <p className="text-sm sm:text-base font-semibold text-indigo-200">
+                  <span className="w-6 h-0.5 bg-indigo-400/80 rounded-full shadow-xs" />
+                  <p className="text-sm sm:text-base font-bold text-amber-200 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {currentQuote.author}
                     {currentQuote.source && (
-                      <span className="text-xs font-normal text-indigo-200/70 ml-2">
+                      <span className="text-xs font-normal text-indigo-100 ml-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
                         ({currentQuote.source})
                       </span>
                     )}
@@ -453,31 +453,45 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
             {filteredQuotes.map((q) => (
               <div
                 key={q.id}
-                className={`p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${
-                  likedIds.includes(q.id) ? 'bg-indigo-950/40 border-indigo-400/40' : ''
+                className={`p-5 rounded-2xl bg-slate-900/90 border border-white/10 hover:border-indigo-400/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${
+                  likedIds.includes(q.id) ? 'border-indigo-400/60 ring-1 ring-indigo-400/30' : ''
                 }`}
               >
-                <div>
+                {/* Card Background Image */}
+                {q.bgImage && !imageErrors[q.id] && (
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <img
+                      src={q.bgImage}
+                      alt={q.author}
+                      onError={() => setImageErrors(prev => ({ ...prev, [q.id]: true }))}
+                      className="w-full h-full object-cover opacity-35 group-hover:opacity-55 filter contrast-105 brightness-105 transition-all duration-500 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/60" />
+                  </div>
+                )}
+
+                <div className="relative z-10">
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-300/30">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 border border-indigo-300/40 backdrop-blur-xs">
                       {q.tag}
                     </span>
                     <button
                       onClick={() => handleToggleLike(q.id)}
-                      className="text-indigo-200/60 hover:text-rose-400 transition-colors cursor-pointer"
+                      className="text-indigo-200/80 hover:text-rose-400 transition-colors cursor-pointer"
                     >
                       <Heart className={`w-4 h-4 ${likedIds.includes(q.id) ? 'fill-rose-400 text-rose-400' : ''}`} />
                     </button>
                   </div>
-                  <p className="font-bold text-white text-sm leading-snug mb-3">
+                  <p className="font-bold text-white text-sm leading-snug mb-3 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     "{q.quote}"
                   </p>
                 </div>
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-indigo-200/70">
-                  <span className="font-semibold text-indigo-200">{q.author}</span>
+                <div className="relative z-10 pt-3 border-t border-white/15 flex items-center justify-between text-xs text-indigo-200/80">
+                  <span className="font-bold text-amber-200 drop-shadow-xs">{q.author}</span>
                   <button
                     onClick={() => handleCopy(q)}
-                    className="p-1.5 rounded-lg hover:bg-white/10 text-indigo-300 transition-colors cursor-pointer"
+                    className="p-1.5 rounded-lg hover:bg-white/10 text-indigo-200 transition-colors cursor-pointer"
                     title="명언 복사"
                   >
                     {copiedId === q.id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
