@@ -138,7 +138,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             <BookPlus className="w-6 h-6 text-amber-800" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-amber-950">온라인 서점 독서 리뷰 작성</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-amber-950">온라인 서점 독서 리뷰 작성</h2>
             <p className="text-xs sm:text-sm text-amber-800/80 mt-0.5 font-sans">
               내가 읽은 책의 감동과 별점, 마음을 울린 한 줄 소감을 학급 서점에 남겨보세요! 📖
             </p>
@@ -208,7 +208,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
                 onChange={(e) => setStudentName(e.target.value)}
                 placeholder="예: 김민준"
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-medium focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-white text-base sm:text-sm font-medium focus:ring-2 focus:ring-amber-800 focus:outline-none"
               />
             </div>
           </div>
@@ -216,8 +216,8 @@ export const StudentForm: React.FC<StudentFormProps> = ({
 
         {/* Section 2: Book Details */}
         <div>
-          <div className="flex items-center gap-2 mb-3 text-xs font-bold text-indigo-700 uppercase tracking-wider">
-            <BookOpen className="w-4 h-4" />
+          <div className="flex items-center gap-2 mb-3 text-xs font-bold text-amber-900 uppercase tracking-wider">
+            <BookOpen className="w-4 h-4 text-amber-700" />
             <span>2. 읽은 도서 정보</span>
           </div>
 
@@ -232,7 +232,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
                 onChange={(e) => setBookTitle(e.target.value)}
                 placeholder="예: 어린 왕자, 마당을 나온 암탉"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm font-medium focus:ring-2 focus:ring-amber-800 focus:outline-none"
               />
             </div>
 
@@ -245,7 +245,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
                 placeholder="예: 생텍쥐페리"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3.5 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:ring-2 focus:ring-amber-800 focus:outline-none"
               />
             </div>
 
@@ -259,7 +259,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
                 value={publisher}
                 onChange={(e) => setPublisher(e.target.value)}
                 placeholder="예: 열린책들"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3.5 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:ring-2 focus:ring-amber-800 focus:outline-none"
               />
             </div>
 
@@ -272,7 +272,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
                 type="date"
                 value={readDate}
                 onChange={(e) => setReadDate(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 bg-white"
+                className="w-full px-3.5 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:ring-2 focus:ring-amber-800 focus:outline-none bg-white"
               />
             </div>
           </div>
@@ -355,7 +355,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             onChange={(e) => setSummary(e.target.value)}
             placeholder="주요 내용을 핵심만 3~4줄로 정리해 보세요."
             required
-            className="w-full p-3.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 leading-relaxed"
+            className="w-full p-3.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:ring-2 focus:ring-amber-800 focus:outline-none leading-relaxed"
           />
         </div>
 
@@ -377,7 +377,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             onChange={(e) => setThoughts(e.target.value)}
             placeholder="이 책을 읽고 느껴진 솔직한 내 생각과 다짐을 자유롭게 적어보세요."
             required
-            className="w-full p-3.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 leading-relaxed"
+            className="w-full p-3.5 rounded-xl border border-slate-200 text-base sm:text-sm focus:ring-2 focus:ring-amber-800 focus:outline-none leading-relaxed"
           />
         </div>
 
@@ -387,7 +387,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             type="submit"
             disabled={isSubmitting}
             id="student-submit-log-btn"
-            className="w-full py-4 px-6 bg-gradient-to-r from-amber-900 via-amber-800 to-stone-900 hover:from-amber-950 hover:to-stone-950 text-amber-100 font-serif font-bold text-base rounded-2xl transition-all shadow-lg shadow-amber-950/20 flex items-center justify-center gap-2.5 disabled:opacity-50 border border-amber-600/30"
+            className="w-full py-4 px-6 bg-gradient-to-r from-amber-900 via-amber-800 to-stone-900 hover:from-amber-950 hover:to-stone-950 text-amber-100 font-bold text-base rounded-2xl transition-all shadow-lg shadow-amber-950/20 flex items-center justify-center gap-2.5 disabled:opacity-50 border border-amber-600/30"
           >
             {isSubmitting ? (
               <span>서점에 리뷰 등록 중...</span>

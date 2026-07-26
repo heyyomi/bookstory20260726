@@ -165,7 +165,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>YES24 구글 Apps Script 연동 데이터</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-serif font-extrabold tracking-tight text-white flex items-center gap-2">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
               <span>📚 YES24 실시간 베스트셀러</span>
             </h2>
             <p className="text-xs sm:text-sm text-amber-200/80 font-sans max-w-2xl leading-relaxed">
@@ -206,7 +206,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="도서명, 저자, 출판사, 줄거리 키워드 검색..."
-              className="w-full pl-10 pr-4 py-2.5 bg-amber-50/50 border border-amber-200 rounded-2xl text-xs sm:text-sm text-amber-950 placeholder-amber-800/40 focus:outline-none focus:ring-2 focus:ring-amber-800/20 focus:border-amber-800 transition-all font-sans"
+              className="w-full pl-10 pr-4 py-2.5 bg-amber-50/50 border border-amber-200 rounded-2xl text-base sm:text-sm text-amber-950 placeholder-amber-800/40 focus:outline-none focus:ring-2 focus:ring-amber-800/20 focus:border-amber-800 transition-all font-sans"
             />
             {searchQuery && (
               <button
@@ -294,7 +294,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
       {isLoading && (
         <div className="bg-white rounded-3xl p-12 text-center border border-amber-200/80 shadow-md">
           <div className="w-12 h-12 border-4 border-amber-800 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-amber-950 font-serif">구글 Apps Script에서 베스트셀러 정보를 불러오는 중...</h3>
+          <h3 className="text-lg font-bold text-amber-950">구글 Apps Script에서 베스트셀러 정보를 불러오는 중...</h3>
           <p className="text-xs text-amber-800/70 mt-1">잠시만 기다려 주세요.</p>
         </div>
       )}
@@ -303,7 +303,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
       {!isLoading && error && (
         <div className="bg-rose-50 rounded-3xl p-8 border border-rose-200 text-center space-y-3">
           <AlertCircle className="w-10 h-10 text-rose-500 mx-auto" />
-          <h3 className="text-base font-bold text-rose-900 font-serif">베스트셀러 정보 불러오기 실패</h3>
+          <h3 className="text-base font-bold text-rose-900">베스트셀러 정보 불러오기 실패</h3>
           <p className="text-xs text-rose-700 max-w-md mx-auto">{error}</p>
           <button
             onClick={fetchBestsellers}
@@ -318,7 +318,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
       {!isLoading && !error && filteredBooks.length === 0 && (
         <div className="bg-white rounded-3xl p-12 text-center border border-amber-200/80 shadow-sm space-y-3">
           <BookOpen className="w-12 h-12 text-amber-300 mx-auto" />
-          <h3 className="text-base font-bold text-amber-950 font-serif">조건에 일치하는 베스트셀러 도서가 없습니다</h3>
+          <h3 className="text-base font-bold text-amber-950">조건에 일치하는 베스트셀러 도서가 없습니다</h3>
           <p className="text-xs text-amber-800/70">검색어나 카테고리 필터를 변경해 보세요.</p>
           <button
             onClick={() => {
@@ -361,7 +361,7 @@ export const Yes24Bestsellers: React.FC<Yes24BestsellersProps> = ({ onSelectBook
                   </div>
 
                   {/* Book Title */}
-                  <h3 className="font-serif font-bold text-amber-950 text-base sm:text-lg leading-snug mb-2 group-hover:text-amber-800 transition-colors">
+                  <h3 className="font-bold text-amber-950 text-base sm:text-lg leading-snug mb-2 group-hover:text-amber-800 transition-colors">
                     {book.title}
                   </h3>
 

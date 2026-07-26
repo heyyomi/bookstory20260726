@@ -122,7 +122,7 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
             <BookOpen className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm font-bold tracking-tight text-amber-100 flex items-center gap-1.5 font-serif">
+            <h2 className="text-sm font-bold tracking-tight text-amber-100 flex items-center gap-1.5">
               <span>온라인 책방 & 감성 독서 서재</span>
               <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-sans">
                 Quote Lounge
@@ -279,7 +279,7 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
             <div className="flex items-start gap-3">
               <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-amber-400/40 shrink-0 rotate-180 -mt-1" />
               <div className="space-y-3">
-                <blockquote className="text-xl sm:text-2xl md:text-3xl font-serif font-bold tracking-tight text-amber-50 leading-relaxed drop-shadow-md">
+                <blockquote className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-amber-50 leading-relaxed drop-shadow-md">
                   "{currentQuote.quote}"
                 </blockquote>
                 <div className="flex items-center gap-2 pt-1">
@@ -371,7 +371,7 @@ export const ReadingQuotesHero: React.FC<ReadingQuotesHeroProps> = ({ onQuoteSel
                       <Heart className={`w-4 h-4 ${likedIds.includes(q.id) ? 'fill-rose-400 text-rose-400' : ''}`} />
                     </button>
                   </div>
-                  <p className="font-serif font-bold text-amber-50 text-sm leading-snug mb-3">
+                  <p className="font-bold text-amber-50 text-sm leading-snug mb-3">
                     "{q.quote}"
                   </p>
                 </div>

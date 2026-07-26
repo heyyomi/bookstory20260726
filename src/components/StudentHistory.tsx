@@ -46,7 +46,7 @@ export const StudentHistory: React.FC<StudentHistoryProps> = ({
             <UserCheck className="w-5 h-5 text-amber-800" />
           </div>
           <div>
-            <h2 className="text-lg font-serif font-bold text-amber-950">내 서재 리뷰 및 독서 기록 조회</h2>
+            <h2 className="text-lg font-bold text-amber-950">내 서재 리뷰 및 독서 기록 조회</h2>
             <p className="text-xs text-amber-800/80">학년, 반, 이름을 검색하여 학급 서점에 등록된 내 독서 리뷰를 찾아보세요.</p>
           </div>
         </div>

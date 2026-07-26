@@ -61,7 +61,7 @@ export const HallOfFame: React.FC<HallOfFameProps> = ({ logs, onSelectLog }) => 
               <Sparkles className="w-4 h-4 text-amber-300" />
               <span>온라인 학급 서점 • Bestseller Showcase</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-serif font-extrabold tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               🏆 이달의 <span className="text-amber-300">베스트셀러 독서 리뷰</span> & <span className="text-amber-300">독서왕 전당</span>
             </h2>
             <p className="text-xs sm:text-sm text-amber-200/90 mt-1 max-w-xl font-sans">

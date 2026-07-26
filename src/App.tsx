@@ -14,6 +14,7 @@ import { StudentHistory } from './components/StudentHistory';
 import { TeacherDashboard } from './components/TeacherDashboard';
 import { HallOfFame } from './components/HallOfFame';
 import { Yes24Bestsellers } from './components/Yes24Bestsellers';
+import { MobileNavigation } from './components/MobileNavigation';
 import { GASSettingsModal } from './components/GASSettingsModal';
 import { TeacherAuthModal } from './components/TeacherAuthModal';
 import { LogDetailModal } from './components/LogDetailModal';
@@ -141,13 +142,13 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full space-y-6">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 sm:pb-12 flex-1 w-full space-y-5 sm:space-y-6">
         
         {/* Dynamic Reading Quotes Hero Showcase */}
         <ReadingQuotesHero />
 
-        {/* Navigation Sub-Tabs Bar */}
-        <div className="bg-white rounded-2xl p-2 shadow-xs border border-amber-200/80 flex items-center justify-between flex-wrap gap-2">
+        {/* Desktop Navigation Sub-Tabs Bar (Hidden on small mobile since MobileNavigation handles it) */}
+        <div className="hidden sm:flex bg-white rounded-2xl p-2 shadow-xs border border-amber-200/80 items-center justify-between flex-wrap gap-2">
           
           {userMode === 'student' ? (
             <div className="flex items-center gap-2 flex-wrap">
@@ -243,7 +244,7 @@ export default function App() {
           )}
 
           {/* Quick Info Pill */}
-          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-amber-800 pr-2 font-serif">
+          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-amber-800 pr-2">
             <BookOpen className="w-4 h-4 text-amber-700" />
             <span>우리반 총 누적 독서록: <strong className="text-amber-900 font-bold">{logs.length}권</strong></span>
           </div>
@@ -301,6 +302,17 @@ export default function App() {
         )}
 
       </main>
+
+      {/* Fixed Mobile Bottom Dock Navigation */}
+      <MobileNavigation
+        userMode={userMode}
+        setUserMode={setUserMode}
+        studentTab={studentTab}
+        setStudentTab={setStudentTab}
+        teacherTab={teacherTab}
+        setTeacherTab={setTeacherTab}
+        onRequestTeacherAccess={() => setIsTeacherAuthOpen(true)}
+      />
 
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200/80 py-6 mt-12 text-center text-xs text-slate-400">

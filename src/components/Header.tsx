@@ -32,17 +32,17 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-amber-50/90 backdrop-blur-md border-b border-amber-200/60 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-amber-50/95 backdrop-blur-md border-b border-amber-200/60 shadow-xs">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Brand Logo & Title */}
-        <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-900 via-amber-800 to-amber-600 flex items-center justify-center text-amber-100 shadow-md shadow-amber-900/20 border border-amber-500/30">
-            <Library className="w-6 h-6 text-amber-200" />
+        <div className="flex items-center gap-2.5 sm:gap-3.5">
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-amber-900 via-amber-800 to-amber-600 flex items-center justify-center text-amber-100 shadow-md shadow-amber-900/20 border border-amber-500/30 shrink-0">
+            <Library className="w-5 h-5 sm:w-6 sm:h-6 text-amber-200" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-amber-950">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <h1 className="text-base sm:text-2xl font-extrabold tracking-tight text-amber-950">
                 우리반 <span className="text-amber-700">독서 라운지 & 기록장</span>
               </h1>
               <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-200/60 text-amber-900 border border-amber-300/80">
@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-4">
           
           {/* Google Sheets Connection Chip */}
           <button
@@ -91,14 +91,14 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onSyncData}
             disabled={isSyncing}
             id="header-sync-btn"
-            className="p-2.5 text-amber-800 hover:text-amber-950 hover:bg-amber-100 rounded-xl transition-all disabled:opacity-50"
+            className="p-2 sm:p-2.5 text-amber-800 hover:text-amber-950 hover:bg-amber-100 rounded-xl transition-all disabled:opacity-50"
             title="서점 데이터 동기화 / 새로고침"
           >
-            <RefreshCw className={`w-5 h-5 ${isSyncing ? 'animate-spin text-amber-800' : ''}`} />
+            <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 ${isSyncing ? 'animate-spin text-amber-800' : ''}`} />
           </button>
 
-          {/* Mode Switcher Tabs */}
-          <div className="flex items-center p-1 bg-amber-100/80 rounded-2xl border border-amber-300/70">
+          {/* Desktop Mode Switcher Tabs (Hidden on mobile as bottom nav handles it) */}
+          <div className="hidden sm:flex items-center p-1 bg-amber-100/80 rounded-2xl border border-amber-300/70">
             <button
               id="mode-student-btn"
               onClick={() => handleModeChange('student')}
