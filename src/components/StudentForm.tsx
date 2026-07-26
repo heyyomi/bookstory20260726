@@ -138,7 +138,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             <BookPlus className="w-6 h-6 text-amber-800" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-amber-950">온라인 서점 독서 리뷰 작성</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-amber-950">온라인 서재 독서 리뷰 작성</h2>
             <p className="text-xs sm:text-sm text-amber-800/80 mt-0.5 font-sans">
               내가 읽은 책의 감동과 별점, 마음을 울린 한 줄 소감을 학급 서점에 남겨보세요! 📖
             </p>
@@ -394,7 +394,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({
             ) : (
               <>
                 <Send className="w-5 h-5 text-amber-300" />
-                <span>서점 서재에 독서 리뷰 제출하기</span>
+                <span>온라인 서재에 독서 리뷰 제출하기</span>
               </>
             )}
           </button>

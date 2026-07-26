@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <h1 className="text-base sm:text-2xl font-extrabold tracking-tight text-amber-950">
-                독서의 숲 <span className="text-amber-700">- 온라인 독서 라운지</span>
+                독서의 숲 <span className="text-amber-700">- 온라인 서재</span>
               </h1>
               <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-200/60 text-amber-900 border border-amber-300/80">
                 <Bookmark className="w-3 h-3 text-amber-700" />
@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
             </div>
             <p className="text-xs text-amber-800/80 hidden sm:block font-sans">
-              책을 만나고 지혜와 생각을 나누는 우리들의 감성 독서 공간
+              책을 만나고 지혜와 생각을 나누는 우리들의 감성 독서 공간 <span className="text-amber-900/60 font-semibold">• 제작자: 헤이요미 (@heyyomi.t)</span>
             </p>
           </div>
         </div>

@@ -332,11 +332,11 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200/80 py-6 mt-12 text-center text-xs text-slate-400">
+      <footer className="bg-white border-t border-slate-200/80 py-6 mt-12 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© 2026 독서의 숲 - 온라인 독서 라운지 • 스마트 학급 독서 교육 모듈</p>
+          <p>© 2026 독서의 숲 - 온라인 서재 • Designed & Created by <strong className="text-amber-900 font-bold">헤이요미 (@heyyomi.t)</strong></p>
           <p className="text-[11px] text-slate-400">
-            Netlify & GitHub SPA 지원 | Google Apps Script Google Sheets DB 연동
+            제작자: @heyyomi.t | Netlify & GitHub SPA | Google Apps Script DB 연동
           </p>
         </div>
       </footer>
